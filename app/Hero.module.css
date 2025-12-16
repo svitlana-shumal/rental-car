@@ -1,8 +1,10 @@
 .hero {
-  height: 700px;
+  height: 100%;
+  width: 1440px;
   background-image: url('/Hero.jpg');
   background-size: cover;
   background-position: center;
+  margin: 0 auto;
 }
 @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
   .hero {
@@ -13,7 +15,8 @@
 }
 
 .heroContainer {
-  padding: 436px 0;
+  padding-top: 436px;
+  padding-bottom: 60px;
 }
 
 .heroTitle {
