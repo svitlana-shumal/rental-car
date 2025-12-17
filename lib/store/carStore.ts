@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { Car } from '@/types/cars';
+import { Car, CarsResponse } from '@/types/cars';
+import { getCars } from '@/lib/api';
 
 interface Filters {
   brand?: string;
@@ -14,9 +15,9 @@ interface CarsStore {
   totalPages: number;
   isLoading: boolean;
   filters: Filters;
-
   fetchCars: (filters?: Filters, reset?: boolean) => Promise<void>;
   loadMore: () => Promise<void>;
+  resetFilters: () => Promise<void>;
 }
 
 export const useCarsStore = create<CarsStore>((set, get) => ({
@@ -28,33 +29,27 @@ export const useCarsStore = create<CarsStore>((set, get) => ({
 
   fetchCars: async (newFilters = {}, reset = true) => {
     set({ isLoading: true });
-
-    const page = reset ? 1 : get().page;
-
-    if (reset) {
-      set({ cars: [], page: 1 });
-    }
-
-    const params = new URLSearchParams({
-      ...get().filters,
-      ...newFilters,
-      page: page.toString(),
-      limit: '4',
-    });
-
-    const res = await fetch(`/api/cars?${params}`);
-    const data = await res.json();
-
+    const currentPage = reset ? 1 : get().page;
+    const mergedFilters = { ...get().filters, ...newFilters, page: currentPage, limit: 4 };
+    const data: CarsResponse = await getCars(mergedFilters);
     set((state) => ({
       cars: reset ? data.cars : [...state.cars, ...data.cars],
-      page: data.page + 1,
-      totalPages: data.totalPages,
+      page: currentPage + 1,
+      totalPages: Number(data.totalPages),
       filters: { ...state.filters, ...newFilters },
       isLoading: false,
     }));
   },
-
   loadMore: async () => {
     await get().fetchCars({}, false);
+  },
+  resetFilters: async () => {
+    set({
+      filters: {},
+      page: 1,
+      cars: [],
+    });
+
+    await get().fetchCars({}, true);
   },
 }));

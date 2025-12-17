@@ -2,6 +2,8 @@
   padding-top: 84px;
   padding-bottom: 56px;
   background-color: var(--white);
+  max-width: 1240px;
+  margin: 0 auto;
 }
 .filter {
   display: grid;
@@ -13,6 +15,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  width: 100%;
 }
 .label {
   display: flex;
@@ -61,13 +64,15 @@
   color: var(--gray);
   border: 1px solid #f7f7f7;
   border-radius: 12px;
-  width: 204px;
+  width: 100%;
+  max-width: 204px;
   box-shadow: 0 4px 36px 0 rgba(0, 0, 0, 0.02);
   background: #fff;
 }
 .buttonWrap {
   display: flex;
   justify-content: flex-end;
+  gap: 10px;
 }
 .btn {
   display: flex;
@@ -76,7 +81,7 @@
   flex-direction: row;
   border-radius: 12px;
   padding-block: 12px;
-  width: 156px;
+  width: 100px;
   height: 44px;
   background-color: var(--button);
   font-weight: 600;

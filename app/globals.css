@@ -13,8 +13,10 @@
 }
 html,
 body {
-  max-width: 100vw;
   overflow-x: hidden;
+}
+html {
+  scroll-behavior: smooth;
 }
 body {
   background-color: var(--white);
@@ -58,4 +60,9 @@ button {
   cursor: pointer;
   border: none;
   background-color: transparent;
+}
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }

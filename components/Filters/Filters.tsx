@@ -9,12 +9,15 @@ import Container from '../Container/page';
 
 export default function Filters() {
   const fetchCars = useCarsStore((state) => state.fetchCars);
+  const resetFilters = useCarsStore((state) => state.resetFilters);
   const [brands, setBrands] = useState<string[]>([]);
   const [isBrandOpen, setIsBrandOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [minMileage, setMinMileage] = useState<string | undefined>();
+  const [maxMileage, setMaxMileage] = useState<string | undefined>();
 
   useEffect(() => {
-    fetch('/api/brands')
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/brands`)
       .then((res) => res.json())
       .then(setBrands)
       .catch(console.error);
@@ -28,11 +31,16 @@ export default function Filters() {
     fetchCars({
       brand: form.brand.value || undefined,
       rentalPrice: form.rentalPrice.value || undefined,
-      minMileage: form.from.value.replace(/\D/g, '') || undefined,
-      maxMileage: form.to.value.replace(/\D/g, '') || undefined,
+      minMileage,
+      maxMileage,
     });
   };
 
+  const handleReset = async () => {
+    setMinMileage(undefined);
+    setMaxMileage(undefined);
+    await resetFilters();
+  };
   return (
     <Container>
       <section className={css.filterContainer}>
@@ -98,15 +106,20 @@ export default function Filters() {
             </label>
           </div>
           <div className={css.group}>
-            <MileageInputs />
+            <MileageInputs
+              onChange={(from, to) => {
+                setMinMileage(from);
+                setMaxMileage(to);
+              }}
+            />
           </div>
           <div className={css.buttonWrap}>
             <button className={css.btn} type="submit">
               Search
             </button>
-            {/* <button className={css.btn} type="button" onClick={() => fetchCars({})}>
+            <button className={css.btn} type="button" onClick={handleReset}>
               Reset
-            </button> */}
+            </button>
           </div>
         </form>
       </section>
