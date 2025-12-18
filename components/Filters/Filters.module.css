@@ -93,3 +93,6 @@
 .btn:hover {
   background-color: var(--button-hover);
 }
+.btn:disabled {
+  background-color: var(--gray);
+}

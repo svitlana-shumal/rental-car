@@ -1,0 +1,101 @@
+.details {
+  padding-top: 84px;
+  padding-bottom: 104px;
+  display: flex;
+  gap: 76px;
+}
+.leftBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px; /* відстань між фото і формою */
+}
+.form {
+  width: 100%;
+  max-width: 640px; /* щоб форма не розтягувалась */
+  border: 1px solid var(--gray);
+  border-radius: 12px;
+  padding: 16px;
+}
+.containerTitle {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.image {
+  border-radius: 19px;
+  max-width: 640px;
+  height: auto;
+  object-fit: cover;
+}
+.info {
+  margin-top: 20px;
+}
+.title {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.33;
+  text-align: flex-start;
+  color: var(--main);
+}
+/* .id {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  color: var(--gray);
+  margin-left: 16px;
+} */
+.icon {
+  margin-right: 8px;
+}
+.address {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  color: var(--main);
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+.mileage {
+  margin-left: 16px;
+}
+.price {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.33;
+  color: var(--button);
+}
+.text {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  color: var(--main);
+  margin-top: 32px;
+}
+
+.textDetail {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 20px;
+}
+.subTitle {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--main);
+}
+.conditions {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  color: var(--main);
+}
+.conditions li {
+  margin-bottom: 16px;
+}
+.textDetail h3 {
+  margin-top: 110px;
+}

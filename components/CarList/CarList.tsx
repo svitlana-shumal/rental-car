@@ -3,6 +3,9 @@
 import { useEffect } from 'react';
 import { useCarsStore } from '@/lib/store/carStore';
 import css from './CarList.module.css';
+import Link from 'next/link';
+import Loader from '../Loader/Loader';
+import Image from 'next/image';
 
 export default function CarList() {
   const { cars, fetchCars, loadMore, isLoading, page, totalPages } = useCarsStore();
@@ -18,10 +21,9 @@ export default function CarList() {
           const parts = car.address.split(',').map((p) => p.trim());
           const city = parts[parts.length - 2];
           const country = parts[parts.length - 1];
-
           return (
             <li key={car.id} className={css.card}>
-              <img src={car.img} alt={car.model} width={276} height={268} className={css.image} />
+              <Image src={car.img} alt={car.model} width={276} height={268} className={css.image} />
               <div className={css.header}>
                 <h3 className={css.title}>
                   {car.brand}
@@ -37,16 +39,16 @@ export default function CarList() {
                   {car.type} | {car.mileage.toLocaleString('uk-UA')} km
                 </p>
               </div>
-              <button type="button" className={css.button}>
+              <Link href={`/catalog/${car.id}`} className={css.button}>
                 Read more
-              </button>
+              </Link>
             </li>
           );
         })}
       </ul>
       {page < totalPages && (
         <button className={css.loadMore} onClick={loadMore} disabled={isLoading}>
-          {isLoading ? 'Loading...' : 'Load more'}
+          {isLoading ? <Loader /> : 'Load more'}
         </button>
       )}
     </section>

@@ -5,6 +5,7 @@ import Filters from '@/components/Filters/Filters';
 import Loader from '@/components/Loader/Loader';
 import { useCarsStore } from '@/lib/store/carStore';
 import CarList from '@/components/CarList/CarList';
+import NotFound from '@/components/NotFound/NotFound';
 
 export default function Catalog() {
   const { cars, loadMore, page, totalPages, isLoading } = useCarsStore();
@@ -14,14 +15,8 @@ export default function Catalog() {
       <Container>
         <Filters />
         {isLoading && page === 1 && <Loader />}
-
         <CarList />
-
-        {/* {page <= totalPages && (
-          <button className={css.button} onClick={loadMore} disabled={isLoading}>
-            Load More
-          </button>
-        )} */}
+        {/* {cars.length > 0 ? <CarList /> : <NotFound />} */}
       </Container>
     </main>
   );

@@ -37,9 +37,12 @@ export default function Filters() {
   };
 
   const handleReset = async () => {
+    await resetFilters();
     setMinMileage(undefined);
     setMaxMileage(undefined);
-    await resetFilters();
+
+    const form = document.querySelector('form');
+    form?.reset();
   };
   return (
     <Container>
@@ -107,6 +110,8 @@ export default function Filters() {
           </div>
           <div className={css.group}>
             <MileageInputs
+              from={minMileage}
+              to={maxMileage}
               onChange={(from, to) => {
                 setMinMileage(from);
                 setMaxMileage(to);
@@ -117,6 +122,7 @@ export default function Filters() {
             <button className={css.btn} type="submit">
               Search
             </button>
+            {}
             <button className={css.btn} type="button" onClick={handleReset}>
               Reset
             </button>
