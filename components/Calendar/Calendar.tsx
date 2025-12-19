@@ -52,16 +52,14 @@ export default function CustomCalendar({ value, onChange }: CustomCalendarProps)
             className={dayClass}
             onClick={() => !isDisabled && onChange(cloneDay)}
           >
-            {' '}
-            {format(day, 'd')}{' '}
+            {format(day, 'd')}
           </div>
         );
         day = addDays(day, 1);
       }
       rows.push(
         <div key={`week-${rows.length}`} className={css.weekRow}>
-          {' '}
-          {days}{' '}
+          {days}
         </div>
       );
       days = [];
