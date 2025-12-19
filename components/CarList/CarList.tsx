@@ -1,32 +1,20 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useCarsStore } from '@/lib/store/carStore';
+import { useFavoritesStore } from '@/lib/store/favoritesStore';
 import css from './CarList.module.css';
 import Link from 'next/link';
-import Loader from '../Loader/Loader';
+import Loader from '@/components/Loader/Loader';
 import Image from 'next/image';
 
 export default function CarList() {
   const { cars, fetchCars, loadMore, isLoading, page, totalPages } = useCarsStore();
-  const [favorites, setFavorites] = useState<string[]>([]);
+  const { favorites, toggleFavorite } = useFavoritesStore();
 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem('favorites') || '[]');
-    setFavorites(stored);
     fetchCars();
-  }, []);
-
-  const toggleFavorite = (id: string) => {
-    let updated;
-    if (favorites.includes(id)) {
-      updated = favorites.filter((favId) => favId !== id);
-    } else {
-      updated = [...favorites, id];
-    }
-    setFavorites(updated);
-    localStorage.setItem('favorites', JSON.stringify(updated));
-  };
+  }, [fetchCars]);
 
   return (
     <section className={css.catalog}>
