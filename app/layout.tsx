@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Manrope, Inter } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header/Header';
+import { ToastContainer } from 'react-toastify';
 
 const geistSans = Manrope({
   variable: '--font-manrope',
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {<Header />}
         {children}
+        <ToastContainer position="top-right" autoClose={3000} />
       </body>
     </html>
   );

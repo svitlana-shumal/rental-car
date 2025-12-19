@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { Car } from '@/types/cars';
 import Loader from '@/components/Loader/Loader';
 import css from './Car.module.css';
+import FormRental from '@/components/FormRental/FormRental';
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -39,7 +40,7 @@ export default function CarDetailsPage({ params }: Props) {
               className={css.image}
             />
           )}
-          <form className={css.form}>{/* тут буде форма */}</form>
+          <FormRental />
         </div>
         <div className={css.info}>
           <div className={css.containerTitle}>

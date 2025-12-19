@@ -22,11 +22,34 @@
   flex-direction: column;
   gap: 8px;
 }
-.image {
-  border-radius: 14px;
+.imageWrapper {
+  position: relative;
   width: 276px;
   height: 268px;
   margin-bottom: 16px;
+}
+.image {
+  border-radius: 14px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.heartButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: none;
+  z-index: 2;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 4px;
+}
+.heartButton svg {
+  fill: var(--gray);
+  transition: fill 0.2s ease;
+}
+.heartButton:hover svg {
+  fill: var(--button);
 }
 .header {
   display: flex;
