@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   addMonths,
   subMonths,
@@ -30,8 +30,8 @@ export default function CustomCalendar({ value, onChange }: CustomCalendarProps)
   const today = startOfDay(new Date());
 
   const generateCalendarRows = () => {
-    const rows: JSX.Element[] = [];
-    let days: JSX.Element[] = [];
+    const rows: React.ReactNode[] = [];
+    let days: React.ReactNode[] = [];
     let day = startDate;
     while (day <= endDate) {
       for (let i = 0; i < 7; i++) {
