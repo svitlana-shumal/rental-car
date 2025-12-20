@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import CustomCalendar from '@/components/Calendar/Calendar';
 import css from './FormRental.module.css';
-import Container from '@/Container/page';
+import Container from '@/components/Container/page';
 import { format } from 'date-fns';
 
 export default function FormRental() {
@@ -54,7 +54,7 @@ export default function FormRental() {
         <input type="email" name="email" required className={css.input} placeholder="Email*" />
       </label>
 
-      <label className={css.label} ref={calendarRef}>
+      <label className={css.label}>
         <input
           type="text"
           name="date"
@@ -65,7 +65,7 @@ export default function FormRental() {
           placeholder="Booking date"
         />
         {showCalendar && (
-          <div className={css.calendarPopup}>
+          <div className={css.calendarPopup} ref={calendarRef}>
             <CustomCalendar
               value={selectedDate}
               onChange={(date) => {
