@@ -9,7 +9,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr) auto;
   align-items: end;
-  gap: 24px;
+  gap: 16px;
 }
 .group {
   display: flex;
@@ -34,10 +34,9 @@
 }
 .select {
   border: none;
-  background: transparent;
   appearance: none;
-  border-radius: 0;
-  background-color: transparent;
+  /* background: transparent; */
+  /* background-color: transparent; */
   margin-top: 8px;
   font-weight: 500;
   font-size: 16px;

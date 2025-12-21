@@ -4,7 +4,6 @@ import { useState, useRef, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import CustomCalendar from '@/components/Calendar/Calendar';
 import css from './FormRental.module.css';
-import Container from '@/components/Container/page';
 import { format } from 'date-fns';
 
 export default function FormRental() {
@@ -77,7 +76,7 @@ export default function FormRental() {
         )}
       </label>
       <label className={css.label}>
-        <textarea name="comment" className={css.textarea} placeholder="Comment" />
+        <input name="comment" className={css.input} placeholder="Comment" />
       </label>
       <button type="submit" className={css.button}>
         Send

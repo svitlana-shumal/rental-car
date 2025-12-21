@@ -50,7 +50,7 @@ export default function CustomCalendar({ value, onChange }: CustomCalendarProps)
           <div
             key={cloneDay.toISOString()}
             className={dayClass}
-            onClick={() => !isDisabled && onChange(cloneDay)}
+            onMouseDown={() => !isDisabled && onChange(cloneDay)}
           >
             {format(day, 'd')}
           </div>
@@ -70,6 +70,7 @@ export default function CustomCalendar({ value, onChange }: CustomCalendarProps)
   const weekDays = Array.from({ length: 7 }, (_, i) =>
     format(addDays(startOfWeek(new Date(), { weekStartsOn: 1 }), i), 'EEE')
   );
+
   return (
     <div className={css.calendar}>
       <div className={css.header}>

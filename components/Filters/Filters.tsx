@@ -6,15 +6,19 @@ import css from './Filters.module.css';
 import { PRICES } from '@/types/cars';
 import { useEffect, useState } from 'react';
 import Container from '../Container/page';
+import CustomSelect from '../CustomSelect/CustomSelect';
+import NoResults from '../NoResults/NoResults';
 
 export default function Filters() {
+  const cars = useCarsStore((state) => state.cars);
   const fetchCars = useCarsStore((state) => state.fetchCars);
   const resetFilters = useCarsStore((state) => state.resetFilters);
   const [brands, setBrands] = useState<string[]>([]);
-  const [isBrandOpen, setIsBrandOpen] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   const [minMileage, setMinMileage] = useState<string | undefined>();
   const [maxMileage, setMaxMileage] = useState<string | undefined>();
+
+  const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
+  const [selectedPrice, setSelectedPrice] = useState<number | null>(null);
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/brands`)
@@ -25,12 +29,9 @@ export default function Filters() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const form = e.currentTarget;
-
     fetchCars({
-      brand: form.brand.value || undefined,
-      rentalPrice: form.rentalPrice.value || undefined,
+      brand: selectedBrand || undefined,
+      rentalPrice: selectedPrice !== null ? String(selectedPrice) : undefined,
       minMileage,
       maxMileage,
     });
@@ -40,84 +41,44 @@ export default function Filters() {
     await resetFilters();
     setMinMileage(undefined);
     setMaxMileage(undefined);
+    setSelectedBrand(null);
+    setSelectedPrice(null);
 
     const form = document.querySelector('form');
     form?.reset();
   };
+
   return (
     <Container>
       <section className={css.filterContainer}>
         <form className={css.filter} onSubmit={handleSubmit}>
-          <div className={css.group}>
-            <label className={css.label}>
-              Car brand
-              <div className={css.selectContainer}>
-                <select
-                  className={css.select}
-                  name="brand"
-                  defaultValue=""
-                  onClick={() => setIsBrandOpen((prev) => !prev)}
-                  onBlur={() => setIsBrandOpen(false)}
-                >
-                  <option className={css.option} value="">
-                    Choose a brand
-                  </option>
+          <CustomSelect
+            label="Car brand"
+            name="brand"
+            options={brands}
+            placeholder="Choose a brand"
+            value={selectedBrand}
+            onChange={(v) => setSelectedBrand(v as string | null)}
+          />
 
-                  {brands.map((brand) => (
-                    <option key={brand} value={brand}>
-                      {brand}
-                    </option>
-                  ))}
-                </select>
-                <span className={css.icon}>
-                  <svg width="16" height="16" aria-hidden="true">
-                    <use
-                      href={`/symbol-defs.svg#${isBrandOpen ? 'icon-active' : 'icon-default'}`}
-                    />
-                  </svg>
-                </span>
-              </div>
-            </label>
-          </div>
-          <div className={css.group}>
-            <label className={css.label}>
-              Price/ 1 hour
-              <div className={css.selectContainer}>
-                <select
-                  className={css.select}
-                  name="rentalPrice"
-                  defaultValue=""
-                  onClick={() => setIsOpen((prev) => !prev)}
-                  onBlur={() => setIsOpen(false)}
-                >
-                  <option value="" disabled>
-                    Choose a price
-                  </option>
+          <CustomSelect
+            label="Price / 1 hour"
+            name="rentalPrice"
+            options={PRICES}
+            placeholder="Choose a price"
+            formatSelected={(v) => `To $${v}`}
+            value={selectedPrice}
+            onChange={(v) => setSelectedPrice(v as number | null)}
+          />
 
-                  {PRICES.map((price) => (
-                    <option key={price} value={price}>
-                      To ${price}
-                    </option>
-                  ))}
-                </select>
-                <span className={css.icon}>
-                  <svg width="16" height="16" aria-hidden="true">
-                    <use href={`/symbol-defs.svg#${isOpen ? 'icon-active' : 'icon-default'}`} />
-                  </svg>
-                </span>
-              </div>
-            </label>
-          </div>
-          <div className={css.group}>
-            <MileageInputs
-              from={minMileage}
-              to={maxMileage}
-              onChange={(from, to) => {
-                setMinMileage(from);
-                setMaxMileage(to);
-              }}
-            />
-          </div>
+          <MileageInputs
+            from={minMileage}
+            to={maxMileage}
+            onChange={(from, to) => {
+              setMinMileage(from);
+              setMaxMileage(to);
+            }}
+          />
           <div className={css.buttonWrap}>
             <button className={css.btn} type="submit">
               Search
@@ -128,6 +89,7 @@ export default function Filters() {
             </button>
           </div>
         </form>
+        {cars.length === 0 && <NoResults />}
       </section>
     </Container>
   );

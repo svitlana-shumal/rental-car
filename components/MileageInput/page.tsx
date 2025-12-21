@@ -16,24 +16,22 @@ export default function MileageInputs({ from, to, onChange }: MileageInputsProps
 
   return (
     <div className={css.inputContainer}>
-      {' '}
-      <label className={css.label}>Car mileage / km</label>{' '}
+      <label className={css.label}>Car mileage / km</label>
       <div className={css.inputs}>
-        {' '}
         <input
           className={css.input}
           placeholder="From"
-          value={from ? formatMileage(from) : ''}
-          onChange={(e) => onChange(clean(e.target.value), to)}
-        />{' '}
-        <div className={css.separator} />{' '}
+          value={from ? `From ${formatMileage(from)}` : ''}
+          onChange={(e) => onChange(clean(e.target.value.replace(/^From\s*/, '')), to)}
+        />
+        <span className={css.separator} />
         <input
           className={css.input}
           placeholder="To"
-          value={to ? formatMileage(to) : ''}
-          onChange={(e) => onChange(from, clean(e.target.value))}
-        />{' '}
-      </div>{' '}
+          value={to ? `To ${formatMileage(to)}` : ''}
+          onChange={(e) => onChange(from, clean(e.target.value.replace(/^To\s*/, '')))}
+        />
+      </div>
     </div>
   );
 }

@@ -2,11 +2,9 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  background-color: var(--inputs);
 }
 .label {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
   font-weight: 400;
   font-size: 12px;
   line-height: 1.33;
@@ -22,16 +20,20 @@
 }
 .input {
   width: 160px;
-  height: 44px;
+  /* height: 44px; */
   font-weight: 500;
   font-size: 16px;
   line-height: 1.25;
-  border-radius: 0;
+  border-radius: 12px;
   border: none;
+  outline: none;
   color: var(--main);
-  background-color: var(--inputs);
+  background-color: var(--white);
   padding: 12px 16px;
   margin-top: 8px;
+}
+.input::placeholder {
+  color: var(--main);
 }
 .separator {
   width: 1px;
