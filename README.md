@@ -1,33 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚗 RentalCar Frontend
 
-## Getting Started
+**RentalCar** is a frontend web application for a car rental company.  
+The project was created as a learning task using **Next.js (App Router)** and **TypeScript**, following modern frontend development practices.
 
-First, run the development server:
+The application allows users to browse available cars, filter them by various criteria, view detailed information about a selected car, and submit a rental request.
+
+---
+
+## 🔗 Live Demo
+
+👉 [View live demo](https://rental-car-fawn.vercel.app/)
+
+---
+
+## 📌 Project Goals
+
+The goal of this project is to build the frontend part of a car rental service using a ready-made backend API.  
+The application includes multiple pages and implements filtering, pagination, routing, and global state management.
+
+Backend API documentation:  
+👉 https://car-rental-api.goit.global/api-docs/
+
+---
+
+## 📄 Pages & Routing
+
+- `/` — Home page with a banner and call-to-action
+- `/catalog` — Catalog page with a list of available cars and filters
+- `/catalog/:id` — Car details page with rental form
+
+---
+
+
+## 🛠 Tech Stack
+
+- **Next.js** (App Router)
+- **React**
+- **TypeScript**
+- **Zustand** — global state management
+- **Axios** — API requests
+- **CSS Modules**
+- **Vercel** — deployment
+
+---
+
+## 📦 State Management
+
+Global state is managed with **Zustand**, including:
+- list of vehicles
+- filter parameters
+- favorites list
+
+Before sending a new filtered request, previous search results are cleared to ensure data accuracy.
+
+---
+
+## 💻 Installation
 
 ```bash
+git clone YOUR_REPO_URL
+cd your-project
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 👩‍💻 Author
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+ Svitlana Shumal-Frontend Developer
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+ 👉 GitHub: https://github.com/svitlana-shumal
 
 ## Deploy on Vercel
 
